@@ -4,45 +4,8 @@ package vertiscales;
 import java.util.*;
 
 public class Man_officesAdv {
-    char[] array = new char[10];
-    Scanner sc = new Scanner(System.in);
-    int energyLevel = 100; // Energy level starts at 100
-    int moodLevel = 100;   // Mood level starts at 100
-    int healthLevel = 100; // Health level starts at 100
-    int time = 0;          // Time starts at 0 minutes
-
-    Random rand = new Random();
-
-    // Random events affecting energy, mood, or health
-    void randomEvent() {
-        int event = rand.nextInt(10);
-        switch (event) {
-            case 0:
-                System.out.println("You caught a cold!");
-                healthLevel -= 20;
-                break;
-            case 1:
-                System.out.println("You found some extra vitamins!");
-                healthLevel += 10;
-                break;
-            case 2:
-                System.out.println("Traffic was worse than expected.");
-                moodLevel -= 10;
-                break;
-            case 3:
-                System.out.println("You had a great dream!");
-                moodLevel += 20;
-                break;
-            default:
-                System.out.println("Nothing unusual happened.");
-        }
-        printStatus();
-    }
-
-    void printStatus() {
-        System.out.println("Current Status - Energy: " + energyLevel + ", Mood: " + moodLevel + ", Health: " + healthLevel + ", Time: " + time + " minutes");
-    }
-
+   
+    Vertirand test=new Vertirand();
     void inter_1() {
         randomEvent(); // Random event before this interaction
         System.out.println("Did you hurry? (y/n)");
@@ -57,7 +20,7 @@ public class Man_officesAdv {
                 array[3] = sc.next().charAt(0);
                 time += 10;
                 if (array[3] == 'y') {
-                    reduceEnergy();
+                    test.reduceEnergy();
                     System.out.println("End - You managed to reach the office.");
                 } else if (array[3] == 'n') {
                     System.out.println("Exit - The manager didn't allow.");
@@ -67,14 +30,14 @@ public class Man_officesAdv {
                     inter_1();
                 }
             } else if (array[2] == 'n') {
-                increaseMood();
+                test.increaseMood();
                 System.out.println("End - No traffic, good start!");
             } else {
                 System.out.println("Wrong input");
                 inter_1();
             }
         } else if (array[1] == 'y') {
-            reduceEnergy();
+            test.reduceEnergy();
             System.out.println("End - Hurrying drained some energy.");
         } else {
             System.out.println("Wrong input");
@@ -83,15 +46,15 @@ public class Man_officesAdv {
     }
 
     void Breakfast() {
-        randomEvent(); // Random event before this interaction
+        test.random(); 
         System.out.println("Did you have breakfast? (y/n)");
         array[4] = sc.next().charAt(0);
         time += 10;
         if (array[4] == 'n') {
-            reduceEnergy();
+            test.reduceEnergy();
             Energy();
         } else if (array[4] == 'y') {
-            increaseEnergy();
+            test.increaseEnergy();
         } else {
             System.out.println("Wrong input");
             Breakfast();
@@ -99,7 +62,7 @@ public class Man_officesAdv {
     }
 
     void Energy() {
-        randomEvent(); // Random event before this interaction
+        test.random(); // Random event before this interaction
         System.out.println("Do you have energy? (y/n)");
         array[5] = sc.next().charAt(0);
         time += 5;
@@ -117,12 +80,12 @@ public class Man_officesAdv {
     }
 
     void inter_2() {
-        randomEvent(); // Random event before this interaction
+        test.random(); // Random event before this interaction
         System.out.println("Do you have mood? (y/n)");
         array[6] = sc.next().charAt(0);
         time += 5;
         if (array[6] == 'y') {
-            reduceMood();
+            test.reduceMood();
             inter_1();
         } else if (array[6] == 'n') {
             for (int i = 0; i < 10; i++) {
@@ -130,11 +93,11 @@ public class Man_officesAdv {
                 array[7] = sc.next().charAt(0);
                 time += 5;
                 if (array[7] == 'y') {
-                    reduceEnergy();
+                    test.reduceEnergy();
                     inter_1();
                     break;
                 } else if (array[7] == 'n') {
-                    increaseMood();
+                    test.increaseMood();
                     Breakfast();
                 } else {
                     System.out.println("Wrong input");
@@ -147,48 +110,7 @@ public class Man_officesAdv {
         }
     }
 
-    void reduceEnergy() {
-        energyLevel -= 10;
-        System.out.println("Energy level reduced to " + energyLevel);
-        if (energyLevel <= 0) {
-            System.out.println("You are too tired to continue.");
-            System.exit(0);
-        }
-    }
-
-    void increaseEnergy() {
-        energyLevel += 10;
-        System.out.println("Energy level increased to " + energyLevel);
-    }
-
-    void reduceMood() {
-        moodLevel -= 10;
-        System.out.println("Mood level reduced to " + moodLevel);
-        if (moodLevel <= 0) {
-            System.out.println("You are too demotivated to continue.");
-            System.exit(0);
-        }
-    }
-
-    void increaseMood() {
-        moodLevel += 10;
-        System.out.println("Mood level increased to " + moodLevel);
-    }
-
-    void reduceHealth() {
-        healthLevel -= 10;
-        System.out.println("Health level reduced to " + healthLevel);
-        if (healthLevel <= 0) {
-            System.out.println("Your health has deteriorated too much.");
-            System.exit(0);
-        }
-    }
-
-    void increaseHealth() {
-        healthLevel += 10;
-        System.out.println("Health level increased to " + healthLevel);
-    }
-
+   
     public static void main(String[] args) {
         Man_offices Intro = new Man_offices();
         System.out.println("Day 1: Did you wake up? (y/n)");
